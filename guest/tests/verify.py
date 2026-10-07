@@ -747,6 +747,20 @@ def main() -> None:
         and '"$root/etc/skel/.config/fcitx5/profile"' in configure,
         "every new user's skeleton home gets the fcitx5 input profile seeded, not just the package",
     )
+    fcitx5_config = read(GUEST / "fragments/fcitx5-config.ini")
+    fcitx5_triggers = re.findall(
+        r"^[0-9]+=(.*)$",
+        fcitx5_config.split("[Hotkey/TriggerKeys]\n", 1)[-1].split("\n[", 1)[0],
+        re.MULTILINE,
+    )
+    check(
+        "fragments/fcitx5-config.ini" in configure
+        and '"$root/etc/skel/.config/fcitx5/config"' in configure
+        and fcitx5_config.count("[Hotkey/TriggerKeys]") == 1
+        and fcitx5_triggers == ["Zenkaku_Hankaku", "Hangul", "Alt_R"],
+        "fcitx5 switches on the right Option key (and the 全角/半角 and 한/영 keys), never "
+        "on Ctrl+Space, which stays the tmux and herdr prefix",
+    )
     fcitx5_profile = read(GUEST / "fragments/fcitx5-profile.ini")
     check(
         "[Groups/0/Items/0]\nName=keyboard-us" in fcitx5_profile

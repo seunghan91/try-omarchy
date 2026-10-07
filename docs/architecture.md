@@ -258,7 +258,11 @@ creates the account on first boot.
   GroupOrder is still the factory's `0=Default` / `1=Korean`. The locale unit
   runs `Before=omarchy-provision-owner.service`, which creates the owner account
   from `/etc/skel`. Other locales and customized group orders are unchanged.
-  `Ctrl + Space` toggles US and Hangul in the Korean group. Users can switch
+  `/etc/skel/.config/fcitx5/config` makes the right Option key (`Alt_R`) the
+  switch key, alongside the dedicated `Zenkaku_Hankaku` and `Hangul` keys, and
+  leaves out fcitx5's default `Control+space`, the tmux and herdr prefix. It
+  toggles US and Chewing in the Default group, and US and Hangul in the Korean
+  group. Users can switch
   groups with `fcitx5-remote -g Korean` or `fcitx5-remote -g Default`. The fontconfig rule
   prefers Traditional Chinese Han variants for `zh-TW`/`zh-Hant` text and
   Noto CJK KR variants for Korean text. Chromium receives the Wayland IME flag

@@ -179,14 +179,19 @@ install -m 0755 "$refresh_hook" \
   "$root/etc/skel/.config/omarchy/hooks/pre-refresh-pacman.d/restore-arm-pacman"
 
 # Seed fcitx5 with the US keyboard as item 0 and Chewing (Bopomofo/zhuyin) as
-# item 1. Ctrl+Space is fcitx5's built-in default trigger, so a user who never
-# presses it stays on plain US input; pressing it reaches Traditional Chinese.
-# A second group, Korean, holds US and Hangul; selecting it once persists.
+# item 1, so a user who never presses the switch key stays on plain US input.
+# A second group, Korean, holds US and Hangul; selecting it once persists. The
+# switch key is the right Option key rather than fcitx5's default Ctrl+Space,
+# which belongs to the tmux and herdr prefix.
 fcitx5_profile="$guest_dir/fragments/fcitx5-profile.ini"
 [[ -f $fcitx5_profile ]] || fail "fcitx5 profile fragment not found: $fcitx5_profile"
+fcitx5_config="$guest_dir/fragments/fcitx5-config.ini"
+[[ -f $fcitx5_config ]] || fail "fcitx5 config fragment not found: $fcitx5_config"
 install -d -m 0755 "$root/etc/skel/.config/fcitx5"
 install -m 0644 "$fcitx5_profile" \
   "$root/etc/skel/.config/fcitx5/profile"
+install -m 0644 "$fcitx5_config" \
+  "$root/etc/skel/.config/fcitx5/config"
 
 # Chromium's Ozone/Wayland backend drops input-method text unless launched
 # with --enable-wayland-ime, so fcitx5 can't reach it otherwise. Basecamp's

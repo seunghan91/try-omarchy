@@ -568,9 +568,10 @@ keep their saved language.
 Applications use translations where available. Omarchy's own setup wizard and
 menus stay in English: upstream has no translation mechanism for those shell
 scripts. The US keyboard layout remains the default input method; fcitx5 also
-includes Chewing (Bopomofo), reachable with `Ctrl + Space` in the Default group.
-A Korean Mac automatically selects the Korean group for the first owner account,
-so `Ctrl + Space` toggles US and Hangul. Other languages keep the Default group.
+includes Chewing (Bopomofo), reachable by tapping the right `Option` key in the
+Default group. A Korean Mac automatically selects the Korean group for the first
+owner account, so the right `Option` key toggles US and Hangul. Other languages
+keep the Default group. `Ctrl + Space` stays the tmux and herdr prefix.
 Noto CJK KR glyph variants are preferred for Korean text; the Traditional Chinese
 font preference remains unchanged.
 
